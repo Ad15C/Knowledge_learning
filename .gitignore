@@ -1,31 +1,24 @@
-###> symfony/framework-bundle ###
 # Environnements et secrets
 /.env
 /.env.*
 !.env.example
 !.env.dist
+/config/secrets/*.php
 
-
-/config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
 /vendor/
-###< symfony/framework-bundle ###
 
-###> phpunit/phpunit ###
+# Packages système 
+*.deb
+
+# PHPUnit
 /phpunit.xml
 .phpunit.result.cache
-###< phpunit/phpunit ###
 
-###> symfony/phpunit-bridge ###
-.phpunit.result.cache
-/phpunit.xml
-###< symfony/phpunit-bridge ###
-
-###> symfony/asset-mapper ###
+# Asset Mapper 
 /public/assets/
 /assets/vendor/
-###< symfony/asset-mapper ###
 
 # IDE / éditeur
 /.idea/
@@ -40,16 +33,11 @@
 *.cache
 *.tmp
 
-# Environnements et secrets
-.env.local
-.env.local.php
-.env.*.local
-/config/secrets/*.php
-
 # Mac / Linux / Windows
 .DS_Store
 Thumbs.db
 
-###> liip/imagine-bundle ###
+# Liip/imagine-bundle
 /public/media/cache/
-###< liip/imagine-bundle ###
+
+
