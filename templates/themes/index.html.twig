@@ -10,6 +10,8 @@ Explorez nos thèmes de formation en ligne : musique, informatique, cuisine, jar
 {{ absolute_url(path('themes_index')) }}
 {% endblock %}
 
+{% block robots %}index,follow{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('styles/user-shared.css') }}">
