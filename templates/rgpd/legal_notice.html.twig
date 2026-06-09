@@ -64,9 +64,10 @@ Consultez les mentions légales concernant la plateforme Knowledge Learning.
 
     <section>
       <h2> 3. Données personnelles</h2>
-        <a class="btn btn-primary" href="{{ path('privacy_policy') }}">
-            Politique de confidentialité
-        </a>
+        <p>
+          Le traitement des données personnelles est détaillé dans notre <a href="{{ path('privacy_policy') }}"> politique de confidentialité</a>, 
+          accessible depuis la plateforme.
+        </p>
     </section>
 
     <section>
@@ -78,18 +79,23 @@ Consultez les mentions légales concernant la plateforme Knowledge Learning.
     </section>
 
     <section>
-            <h2> 5. Emails</h2>
-            <p> 
-              Les emails envoyés dans le cadre du fonctionnement du service (confirmation d'inscription, 
-              réinitialisation du mot de passe, confirmation d'achat ou d'accès aux formations) reposent 
-              sur l'exécution du contrat entre l'utilisateur et la plateforme.
-            </p>
+      <h2> 5. Emails</h2>
+        <p> 
+          Les emails envoyés dans le cadre du fonctionnement du service (confirmation d'inscription, 
+          réinitialisation du mot de passe, confirmation d'achat ou d'accès aux formations) reposent 
+          sur l'exécution du contrat entre l'utilisateur et la plateforme.
+        </p>
 
-            <p> 
-              A ce jour, la plateforme n'envoie pas de newsletters, ni de communications commerciales. 
-              Si de telles communications étaient proposées à l'avenir, elles seraient soumises au consentement 
-              préalable de l'utilisateur conformément à la réglementation applicable.
-            </p>
-        </section>
+        <p> 
+          A ce jour, la plateforme n'envoie pas de newsletters, ni de communications commerciales. 
+          Si de telles communications étaient proposées à l'avenir, elles seraient soumises au consentement 
+          préalable de l'utilisateur conformément à la réglementation applicable.
+        </p>
+    </section>
+
+    <a class="btn btn-primary" href="{{ path('homepage') }}">
+      Retour à l’accueil
+    </a>
+    
 </div>
 {% endblock %}
