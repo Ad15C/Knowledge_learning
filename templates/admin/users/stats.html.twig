@@ -1,0 +1,142 @@
+{% extends 'dashboard/admin/_base.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('styles/admin/users.css') }}">
+{% endblock %}
+
+{% block title %}Admin - Statistiques et suivi pédagogique{% endblock %}
+
+{% block robots %}noindex,nofollow{% endblock %}
+
+{% block dashboard_content %}
+<div class="admin-users-edit">
+  <div class="admin-page-header">
+    <div>
+      <h1 class="admin-page-title">Statistiques et suivi pédagogique</h1>
+      <p class="admin-page-subtitle">
+        Cette page présente les principaux indicateurs commerciaux et pédagogiques de la plateforme.
+      </p>
+    </div>
+  </div>
+
+  <div class="dashboard-card card-white admin-section">
+    <h2 class="admin-section-title">La plateforme en quelques chiffres</h2>
+
+    <div class="admin-stats-grid">
+      <div class="admin-stat-card">
+        <span class="admin-stat-label">Utilisateurs actifs</span>
+        <strong class="admin-stat-value">{{ activeUsersCount }}</strong>
+      </div>
+
+      <div class="admin-stat-card">
+        <span class="admin-stat-label">Commandes payées</span>
+        <strong class="admin-stat-value">{{ paidPurchasesCount }}</strong>
+      </div>
+
+      <div class="admin-stat-card">
+        <span class="admin-stat-label">Total des ventes</span>
+        <strong class="admin-stat-value">{{ totalSales|number_format(2, ',', ' ') }} €</strong>
+      </div>
+
+      <div class="admin-stat-card">
+        <span class="admin-stat-label">Certificats délivrés</span>
+        <strong class="admin-stat-value">{{ certificationsCount }}</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-card card-white admin-section">
+    <h2 class="admin-section-title">Suivi commercial</h2>
+
+    <h3 class="admin-subtitle">Cursus les plus achetés</h3>
+
+    {% if mostPurchasedCursus is empty %}
+      <p class="admin-empty">Aucun cursus acheté pour le moment.</p>
+    {% else %}
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Cursus</th>
+            <th>Nombre d’achats</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cursus in mostPurchasedCursus %}
+            <tr>
+              <td>{{ cursus.cursusName }}</td>
+              <td>{{ cursus.total }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+
+    <h3 class="admin-subtitle admin-subtitle--spaced">Leçons les plus achetées</h3>
+
+    {% if mostPurchasedLessons is empty %}
+      <p class="admin-empty">Aucune leçon achetée pour le moment.</p>
+    {% else %}
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Leçon</th>
+            <th>Nombre d’achats</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for lesson in mostPurchasedLessons %}
+            <tr>
+              <td>{{ lesson.lessonTitle }}</td>
+              <td>{{ lesson.total }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+  </div>
+
+  <div class="dashboard-card card-white admin-section">
+    <h2 class="admin-section-title">Suivi pédagogique</h2>
+
+    <div class="admin-stats-grid">
+      <div class="admin-stat-card">
+        <span class="admin-stat-label">Validations de leçons</span>
+        <strong class="admin-stat-value">{{ lessonsValidatedCount }}</strong>
+      </div>
+
+      <div class="admin-stat-card">
+        <span class="admin-stat-label">Certificats délivrés</span>
+        <strong class="admin-stat-value">{{ certificationsCount }}</strong>
+      </div>
+    </div>
+
+    <h3 class="admin-subtitle admin-subtitle--spaced">Leçons les plus validées</h3>
+
+    {% if mostValidatedLessons is empty %}
+      <p class="admin-empty">Aucune leçon validée pour le moment.</p>
+    {% else %}
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Leçon</th>
+            <th>Nombre de validations</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for lesson in mostValidatedLessons %}
+            <tr>
+              <td>{{ lesson.lessonTitle }}</td>
+              <td>{{ lesson.total }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+  </div>
+
+  <a href="{{ path('admin_dashboard') }}" class="btn btn-secondary">
+    ← Retour à l'espace administrateur
+  </a>
+</div>
+{% endblock %}

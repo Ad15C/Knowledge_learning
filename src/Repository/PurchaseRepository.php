@@ -204,4 +204,24 @@ class PurchaseRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function countPaidPurchases(): int
+    {
+        return (int) $this->createQueryBuilder('p')
+            ->select('COUNT(p.id)')
+            ->andWhere('p.status = :paid')
+            ->setParameter('paid', Purchase::STATUS_PAID)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function getTotalSales(): float
+    {
+        return (float) $this->createQueryBuilder('p')
+            ->select('COALESCE(SUM(p.total), 0)')
+            ->andWhere('p.status = :paid')
+            ->setParameter('paid', Purchase::STATUS_PAID)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

@@ -72,4 +72,36 @@ class PurchaseItemRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findMostPurchasedLessons(): array
+    {
+        return $this->createQueryBuilder('pi')
+            ->select('l.title AS lessonTitle, COUNT(pi.id) AS total')
+            ->join('pi.lesson', 'l')
+            ->join('pi.purchase', 'p')
+            ->andWhere('pi.lesson IS NOT NULL')
+            ->andWhere('p.status = :paid')
+            ->setParameter('paid', Purchase::STATUS_PAID)
+            ->groupBy('l.id')
+            ->orderBy('total', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findMostPurchasedCursus(): array
+    {
+        return $this->createQueryBuilder('pi')
+            ->select('c.name AS cursusName, COUNT(pi.id) AS total')
+            ->join('pi.cursus', 'c')
+            ->join('pi.purchase', 'p')
+            ->andWhere('pi.cursus IS NOT NULL')
+            ->andWhere('p.status = :paid')
+            ->setParameter('paid', Purchase::STATUS_PAID)
+            ->groupBy('c.id')
+            ->orderBy('total', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+    }
 }
