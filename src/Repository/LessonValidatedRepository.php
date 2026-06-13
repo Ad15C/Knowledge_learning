@@ -58,4 +58,16 @@ class LessonValidatedRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findMostValidatedLessons(): array
+    {
+        return $this->createQueryBuilder('lv')
+            ->select('l.title AS lessonTitle, COUNT(lv.id) AS total')
+            ->join('lv.lesson', 'l')
+            ->groupBy('l.id')
+            ->orderBy('total', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+    }
+
 }
