@@ -9,6 +9,7 @@
 
   {% if app.user %}
     <h1>Bienvenue, {{ app.user.firstName }} {{ app.user.lastName }} !</h1>
+    <p> Retrouvez ici une vue d'ensemble de l'activité de la plateforme. </p>
   {% else %}
     <h1>Bienvenue</h1>
   {% endif %}
@@ -29,11 +30,11 @@
 
       <div class="card-links">
         <a href="{{ path('admin_users_index', { status: 'active' }) }}" data-no-card-click>
-          Liste des utilisateurs actifs
+          Liste des utilisateurs
         </a>
 
         <a href="{{ path('admin_stats') }}" data-no-card-click>
-          Statistiques & suivi pédagogique
+          Statistiques et indicateurs
         </a>
       </div>
 
@@ -57,7 +58,7 @@
       <h2>Thèmes pédagogiques</h2>
 
       <div class="card-links">
-        <a href="{{ path('admin_theme_index') }}" data-no-card-click>Liste des thèmes</a>
+        <a href="{{ path('admin_theme_index') }}" data-no-card-click>Catalogue des thèmes</a>
         <a href="{{ path('admin_theme_new') }}" data-no-card-click>Créer un nouveau thème</a>
       </div>
 
@@ -77,7 +78,7 @@
       <h2>Cursus</h2>
 
       <div class="card-links">
-        <a href="{{ path('admin_cursus_index') }}" data-no-card-click>Liste des cursus</a>
+        <a href="{{ path('admin_cursus_index') }}" data-no-card-click>Catalogue des cursus</a>
         <a href="{{ path('admin_cursus_new') }}" data-no-card-click>Créer un nouveau cursus</a>
       </div>
 
@@ -100,7 +101,7 @@
 
       <div class="card-links">
         <a href="{{ path('admin_lesson_index') }}" data-no-card-click>Catalogue des leçons</a>
-        <a href="{{ path('admin_lesson_new') }}" data-no-card-click>Ajouter une leçon</a>
+        <a href="{{ path('admin_lesson_new') }}" data-no-card-click>Créer une leçon</a>
       </div>
 
       <a href="{{ path('admin_lesson_index') }}" class="card-link-indicator" data-no-card-click>
@@ -120,9 +121,9 @@
 
       <div class="card-links">
         <a href="{{ path('admin_purchase_index') }}" data-no-card-click>Toutes les commandes</a>
-        <a href="{{ path('admin_purchase_index', { status: 'paid' }) }}" data-no-card-click>Commandes payées</a>
-        <a href="{{ path('admin_purchase_index', { status: 'pending' }) }}" data-no-card-click>Paiements en attente</a>
-        <a href="{{ path('admin_purchase_index', { status: 'canceled' }) }}" data-no-card-click>Commandes annulées</a>
+        <a href="{{ path('admin_purchase_index', { status: 'paid' }) }}" data-no-card-click>Payées</a>
+        <a href="{{ path('admin_purchase_index', { status: 'pending' }) }}" data-no-card-click>En attente de paiement</a>
+        <a href="{{ path('admin_purchase_index', { status: 'canceled' }) }}" data-no-card-click>Annulées</a>
       </div>
 
       <a href="{{ path('admin_purchase_index') }}" class="card-link-indicator" data-no-card-click>
@@ -142,9 +143,9 @@
 
       <div class="card-links">
         <a href="{{ path('admin_contact_index') }}" data-no-card-click>Tous les messages</a>
-        <a href="{{ path('admin_contact_index', { status: 'read' }) }}" data-no-card-click>Messages lus</a>
-        <a href="{{ path('admin_contact_index', { status: 'unread' }) }}" data-no-card-click>Messages non lus</a>
-        <a href="{{ path('admin_contact_index', { status: 'handled' }) }}" data-no-card-click>Messages traités</a>
+        <a href="{{ path('admin_contact_index', { status: 'read' }) }}" data-no-card-click>Lus</a>
+        <a href="{{ path('admin_contact_index', { status: 'unread' }) }}" data-no-card-click>Non lus</a>
+        <a href="{{ path('admin_contact_index', { status: 'handled' }) }}" data-no-card-click>Traités</a>
       </div>
 
       <a href="{{ path('admin_contact_index') }}" class="card-link-indicator" data-no-card-click>
