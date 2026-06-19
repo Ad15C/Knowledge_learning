@@ -18,7 +18,18 @@
         <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
     {% endblock %}
     
-    {% block structured_data %}{% endblock %}
+    {% block structured_data %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Knowledge Learning",
+        "description": "Plateforme e-learning proposant des formations en ligne accessibles à tous.",
+        "url": "{{ app.request.schemeAndHttpHost }}",
+        "logo": "{{ absolute_url(asset('images/knowledge_learning_logo.jpeg')) }}"
+    }
+    </script>
+    {% endblock %}
 </head>
 <body>
 
