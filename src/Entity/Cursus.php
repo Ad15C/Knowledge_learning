@@ -23,6 +23,9 @@ class Cursus
     #[ORM\Column(length: 255, unique: true)]
     private ?string $slug = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $alt = null;
+
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     #[Assert\NotBlank(message: 'Le prix est obligatoire.')]
     #[Assert\PositiveOrZero(message: 'Le prix doit être positif ou nul.')]
@@ -71,7 +74,7 @@ class Cursus
         return $this;
     }
     
-        public function getSlug(): ?string
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
@@ -79,6 +82,17 @@ class Cursus
     public function setSlug(?string $slug): static
     {
         $this->slug = $slug !== null ? trim($slug) : null;
+        return $this;
+    }
+
+    public function getAlt(): ?string
+    {
+        return $this->alt;
+    }
+
+    public function setAlt(?string $alt): static
+    {
+        $this->alt = $alt !== null ? trim($alt) : null;
         return $this;
     }
 
