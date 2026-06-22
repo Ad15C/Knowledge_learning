@@ -21,6 +21,9 @@ class Lesson
     #[ORM\Column(length: 255, unique: true)]
     private ?string $slug = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $alt = null;
+
     #[ORM\Column(type: 'decimal', precision: 6, scale: 2, nullable: false)]
     #[Assert\NotBlank(message: 'Le prix est obligatoire.')]
     #[Assert\PositiveOrZero(message: 'Le prix doit être positif ou nul.')]
@@ -69,6 +72,16 @@ class Lesson
         return $this;
     }
 
+    public function getAlt(): ?string
+    {
+        return $this->alt;
+    }
+
+    public function setAlt(?string $alt): static
+    {
+        $this->alt = $alt !== null ? trim($alt) : null;
+        return $this;
+    }
     /**
      * On retourne string pour rester cohérent avec Doctrine decimal.
      */

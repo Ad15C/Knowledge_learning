@@ -23,6 +23,9 @@ class Theme
     #[ORM\Column(length: 255, unique: true)]
     private ?string $slug = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $alt = null;
+
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $description = null;
 
@@ -68,6 +71,17 @@ class Theme
     public function setSlug(?string $slug): static
     {
         $this->slug = $slug !== null ? trim($slug) : null;
+        return $this;
+    }
+
+    public function getAlt(): ?string
+    {
+        return $this->alt;
+    }
+
+    public function setAlt(?string $alt): static
+    {
+        $this->alt = $alt !== null ? trim($alt) : null;
         return $this;
     }
 
