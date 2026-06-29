@@ -34,7 +34,7 @@
 
     <form
       method="post"
-      action="{{ path('admin_lesson_disable', { slug: lesson.slug }) }}"
+      action="{{ path('admin_lesson_disable', { id: lesson.id }) }}"
       class="inline-form"
       onsubmit="return confirm('Confirmer la désactivation ?');"
     >
