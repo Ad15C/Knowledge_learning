@@ -159,7 +159,7 @@ class AdminLessonController extends AbstractController
         ]);
     }
 
-    // 5) Action POST archiver
+    // 5) Action POST Désactiver (archiver)
     #[Route('/{id}/disable', name: 'disable', requirements: ['id' => '\d+'], methods: ['POST'])]
     public function disable(Lesson $lesson, Request $request, EntityManagerInterface $em): Response
     {
