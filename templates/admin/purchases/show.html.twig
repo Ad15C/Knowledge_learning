@@ -27,7 +27,7 @@
           'cart': ['pending','paid','canceled'],
           'pending': ['paid','canceled'],
           'paid': ['canceled'],
-          'canceled': []
+          'canceled': ['pending','paid']
         } %}
         {% set current = purchase.status %}
         {% set allowed = transitions[current] ?? [] %}
