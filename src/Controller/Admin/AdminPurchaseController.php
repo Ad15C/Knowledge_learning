@@ -180,7 +180,7 @@ class AdminPurchaseController extends AbstractController
             Purchase::STATUS_CART => [Purchase::STATUS_PENDING, Purchase::STATUS_PAID, Purchase::STATUS_CANCELED],
             Purchase::STATUS_PENDING => [Purchase::STATUS_PAID, Purchase::STATUS_CANCELED],
             Purchase::STATUS_PAID => [Purchase::STATUS_CANCELED],
-            Purchase::STATUS_CANCELED => [],
+            Purchase::STATUS_CANCELED => [Purchase::STATUS_PENDING, Purchase::STATUS_PAID],
         ];
 
         if ($newStatus === $oldStatus) {
