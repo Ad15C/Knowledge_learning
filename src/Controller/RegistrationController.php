@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 class RegistrationController extends AbstractController
 {
@@ -18,7 +20,8 @@ class RegistrationController extends AbstractController
     public function register(
         Request $request,
         UserPasswordHasherInterface $passwordHasher,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        MailerInterface $mailer
     ): Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -37,18 +40,31 @@ class RegistrationController extends AbstractController
             $em->persist($user);
             $em->flush();
 
+            $verifyUrl = $this->generateUrl(
+                'app_verify_email',
+                ['token' => $user->getVerificationToken()],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            );
+
+            $email = (new Email())
+                ->from('knowledgelearningproject@alwaysdata.net')
+                ->to($user->getEmail())
+                ->subject('Activez votre compte Knowledge Learning')
+                ->html("
+                    <p>Bonjour,</p>
+                    <p>Merci pour votre inscription.</p>
+                    <p><a href=\"$verifyUrl\">Cliquez ici pour activer votre compte</a></p>
+                    <p>Ce lien expire dans 24 heures.</p>
+                ");
+
+            $mailer->send($email);
+
             $this->addFlash('success', 'Inscription réussie ! Vérifiez votre email pour activer votre compte.');
+
 
             // Dev/Test uniquement : afficher le lien
             if (in_array($this->getParameter('kernel.environment'), ['dev', 'test'], true)) {
-                $verifyUrl = $this->generateUrl(
-                    'app_verify_email',
-                    [],
-                    UrlGeneratorInterface::ABSOLUTE_URL
-                ) . '?token=' . $user->getVerificationToken();
-
                 $request->getSession()->set('dev_verify_url', $verifyUrl);
-
                 $this->addFlash('info', 'Lien de vérification disponible dans la navigation.');
             }
 
