@@ -60,8 +60,8 @@ class RegistrationController extends AbstractController
 
             try {
                 $mailer->send($email);
-            } catch (TransportExceptionInterface $e) {
-                dd($e->getMessage());
+            } catch (\Throwable $e) {
+                dd($e::class, $e->getMessage());
             }
 
             $this->addFlash('success', 'Inscription réussie ! Vérifiez votre email pour activer votre compte.');
