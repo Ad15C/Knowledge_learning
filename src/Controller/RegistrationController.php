@@ -59,8 +59,8 @@ class RegistrationController extends AbstractController
                 ");
 
             try {
-                dd($user->getEmail(), $verifyUrl);
                 $mailer->send($email);
+                dd('MAIL ENVOYÉ', $user->getEmail());
             } catch (\Throwable $e) {
                 dd($e::class, $e->getMessage());
             }
