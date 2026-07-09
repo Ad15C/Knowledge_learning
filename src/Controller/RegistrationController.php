@@ -13,7 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -58,12 +57,7 @@ class RegistrationController extends AbstractController
                     <p>Ce lien expire dans 24 heures.</p>
                 ");
 
-            try {
-                $mailer->send($email);
-                dd('MAIL ENVOYÉ', $user->getEmail());
-            } catch (\Throwable $e) {
-                dd($e::class, $e->getMessage());
-            }
+            $mailer->send($email);
 
             $this->addFlash('success', 'Inscription réussie ! Vérifiez votre email pour activer votre compte.');
 
