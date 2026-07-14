@@ -44,9 +44,22 @@ class PurchaseItem
     public function setQuantity(int $quantity): static { $this->quantity = max(1, $quantity); return $this; }
 
     public function getUnitPrice(): float { return (float) $this->unitPrice; }
-    public function setUnitPrice(float $price): static
+    public function getUnitPriceInCents(): int
     {
+        return (int) round(((float) $this->unitPrice) * 100);
+    }
+    public function setUnitPrice(float|int|string $price): static
+    {
+        $price = (float) $price;
+
+        if ($price < 0) {
+            throw new \InvalidArgumentException(
+                'Le prix unitaire ne peut pas être négatif.'
+            );
+        }
+
         $this->unitPrice = number_format($price, 2, '.', '');
+
         return $this;
     }
 

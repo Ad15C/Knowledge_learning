@@ -12,6 +12,9 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\Controller\StripeWebhookController:
+        arguments:
+            $webhookSecret: '%env(STRIPE_WEBHOOK_SECRET)%'
 
     # Force le listener Doctrine à être enregistré
     App\EventListener\ContactSentAtListener:
